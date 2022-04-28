@@ -57,7 +57,7 @@ class check:
 
     def mailsend():
       label = subprocess.check_output(["git", "describe"]).strip() 
-      print("git user details: ", label) 
+    #   print("git user details: ", label) 
         # create message object instance
       msg = MIMEMultipart()
       message = "Thank you"
