@@ -36,7 +36,7 @@ atexit.register(lambda: scheduler.shutdown())
    
 @app.route('/hello', methods=['GET', 'POST'])
 def welcome():
-    process.check.mailsend()
+    # process.check.mailsend()
     lsres = process.check.checkpackages()
     print(lsres)
     return "Hello World!"
