@@ -6,10 +6,16 @@ db = SQLAlchemy()
 
 class dbaccessdetails:
     def frameworkdetails():
-        sql = text("select * from packagesdetails")
-        result = db.engine.execute(sql)
-        print(result)
-        return jsonify({'result': [dict(row) for row in result]})
+        try:
+           sql = text("select * from packagesdetails")
+           result = db.engine.execute(sql)
+           print(result)
+           return jsonify({'result': [dict(row) for row in result]})
+        except Exception as e:
+            print("Exception Error: {e}")
+            #   exception(e)
+            return "Exception Error:{e}"
+
 
     def updateframwork(pspackagename,psversion):
         sql = text("update packagesdetails set version = '"+ psversion +"' where packagename = '"+ pspackagename +"'")
