@@ -59,7 +59,7 @@ class check:
         # setup the parameters of the message
         password = "@gk8072721917"
         msg['From'] = "pgopalakrishnan1996@gmail.com"
-        msg['To'] = "manikandan.chellamuthu@saama.com"
+        msg['To'] = "Gopalakrishnan.palanisamy@saama.com"
         msg['Cc'] = "Gopalakrishnan.palanisamy@saama.com"
         msg['Subject'] = "Subscription"
         # add in the message body
