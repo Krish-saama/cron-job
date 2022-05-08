@@ -27,45 +27,47 @@ class check:
             url = "https://api.github.com/repos/"+ fetch['accountname'] +"/"+ fetch['repositoriename'] +"/contents/requirementsjson.txt?ref="+ fetch['branchname'] +""
             payload={}
             headers = {
-              'Authorization': 'token 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'
+              'Authorization': 'token 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'
             }            
             strresponse = requests.request("GET", url, headers=headers, data=payload)
             print(strresponse.text)
             jsres = json.loads(strresponse.text)
             lscon = jsres['content']
             lscon = base64.b64decode(lscon)
-            # lsreqjson = json.loads(lscon)
+            print(lscon)
+
+            lsreqjson = json.loads(lscon)
             for k in lscon:
                 print(k, lscon[k])
-            # for line in lscon.splitlines():
-            #   print(line)
-            #   lineResult = libLAPFF.parseLine(line)
-
-            lspac = fetch['packagename']
-            lsinstalledver = installed_packages[lspac.title()]
-            lsvercheck = bool(lsinstalledver and not lsinstalledver.isspace())
-            url = f'https://pypi.python.org/pypi/{lspac}/json'
-            releases = json.loads(request.urlopen(url).read())['info']
-            lsversion = str(releases["version"])
-            lssummary = releases["summary"]
-            lsinstpack = lspac + " " +lsversion
-            lsintlatestver = int(lsversion.replace(".", ""))
-            if(lsvercheck):
-                lsinttblver = int(lsinstalledver.replace(".", ""))
-            else:
-                lsinttblver = 0
-            if(lsinttblver <= lsintlatestver):
-                # implement pip as a subprocess:
-                subprocess.check_call([sys.executable, '-m', 'pip', 'install', lspac])
-                # process output with an API in the subprocess module:
-                # reqs = subprocess.check_output(
-                #     [sys.executable, '-m', 'pip', lspac])
-                # summary
-            #  lsres = dbaccess.dbaccessdetails.updateframwork(lspac,lsversion)
-                check.mailsend(lsinstpack,lssummary)
-                print("Successfully installed")
-            else:
-                print(lsinstpack, "Already installed latest")
+                # for line in lscon.splitlines():
+                #   print(line)
+                #   lineResult = libLAPFF.parseLine(line)
+                # lspac = fetch['packagename']
+                lspac = k
+                lsinstalledver = installed_packages[lspac.title()]
+                lsvercheck = bool(lsinstalledver and not lsinstalledver.isspace())
+                url = f'https://pypi.python.org/pypi/{lspac}/json'
+                releases = json.loads(request.urlopen(url).read())['info']
+                lsversion = str(releases["version"])
+                lssummary = releases["summary"]
+                lsinstpack = lspac + " " +lsversion
+                lsintlatestver = int(lsversion.replace(".", ""))
+                if(lsvercheck):
+                    lsinttblver = int(lsinstalledver.replace(".", ""))
+                else:
+                    lsinttblver = 0
+                if(lsinttblver <= lsintlatestver):
+                    # implement pip as a subprocess:
+                    subprocess.check_call([sys.executable, '-m', 'pip', 'install', lspac])
+                    # process output with an API in the subprocess module:
+                    # reqs = subprocess.check_output(
+                    #     [sys.executable, '-m', 'pip', lspac])
+                    # summary
+                #  lsres = dbaccess.dbaccessdetails.updateframwork(lspac,lsversion)
+                    check.mailsend(lsinstpack,lssummary)
+                    print("Successfully installed")
+                else:
+                    print(lsinstpack, "Already installed latest")
         return lsres
 
     def mailsend(pspackage, psdescription):
