@@ -21,8 +21,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://127.0.0.1/item?user=postgres&password=postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 dbaccess.db.init_app(app)
-app = dbaccess
-app.appcon
+# app = dbaccess
+# app.appcon
 # with app.app_context():
 #     dbaccess.db.create_all()
 
@@ -32,7 +32,7 @@ app.appcon
 
 def do_something():
     print("Doing stuff...")
-    process.check.checkpackages()
+    # process.check.checkpackages()
     # do your stuff
     s.enter(1, 1, do_something, (s,))
 if __name__ == '__main__':

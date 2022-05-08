@@ -24,7 +24,7 @@ class check:
         # print(data['result'])
         # print("installed_packages", installed_packages)
         for fetch in data['result']:
-            url = "https://api.github.com/repos/"+ fetch['accountname'] +"/"+ fetch['repositoriename'] +"/contents/requirements.txt?ref="+ fetch['branchname'] +""
+            url = "https://api.github.com/repos/"+ fetch['accountname'] +"/"+ fetch['repositoriename'] +"/contents/requirementsjson.txt?ref="+ fetch['branchname'] +""
             payload={}
             headers = {
               'Authorization': 'token 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'
