@@ -27,15 +27,18 @@ class check:
             url = "https://api.github.com/repos/"+ fetch['accountname'] +"/"+ fetch['repositoriename'] +"/contents/requirementsjson.txt?ref="+ fetch['branchname'] +""
             payload={}
             headers = {
-              'Authorization': 'token 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'
+              'Authorization': 'token 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'
             }            
             strresponse = requests.request("GET", url, headers=headers, data=payload)
             print(strresponse.text)
             jsres = json.loads(strresponse.text)
             lscon = jsres['content']
             lscon = base64.b64decode(lscon)
-            for line in lscon.splitlines():
-              print(line)
+            # lsreqjson = json.loads(lscon)
+            for k in lscon:
+                print(k, lscon[k])
+            # for line in lscon.splitlines():
+            #   print(line)
             #   lineResult = libLAPFF.parseLine(line)
 
             lspac = fetch['packagename']
