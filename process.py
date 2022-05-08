@@ -9,6 +9,9 @@ from urllib import request
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+import requests
+import base64
+# import l
 
 installed_packages = {
     d.project_name: d.version for d in pkg_resources.working_set}
@@ -21,7 +24,20 @@ class check:
         # print(data['result'])
         # print("installed_packages", installed_packages)
         for fetch in data['result']:
-            # print(fetch['packagename'])
+            url = "https://api.github.com/repos/"+ fetch['accountname'] +"/"+ fetch['repositoriename'] +"/contents/requirements.txt?ref="+ fetch['branchname'] +""
+            payload={}
+            headers = {
+              'Authorization': 'token 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'
+            }            
+            strresponse = requests.request("GET", url, headers=headers, data=payload)
+            print(strresponse.text)
+            jsres = json.loads(strresponse.text)
+            lscon = jsres['content']
+            lscon = base64.b64decode(lscon)
+            for line in lscon.splitlines():
+              print(line)
+            #   lineResult = libLAPFF.parseLine(line)
+
             lspac = fetch['packagename']
             lsinstalledver = installed_packages[lspac.title()]
             lsvercheck = bool(lsinstalledver and not lsinstalledver.isspace())
