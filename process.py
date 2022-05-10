@@ -34,11 +34,16 @@ class check:
                 jsres = json.loads(strresponse.text)
                 lscon = jsres['content']
                 lscon = base64.b64decode(lscon)
+                objt={}
                 for line in lscon.splitlines():
                     lspacname = line.decode()
                     lssplitval = lspacname.split("==")
                     lspac = lssplitval[0].strip()
                     lsstrver = lssplitval[1].strip()
+                    objt[lspac] = lsstrver
+                for k in objt:
+                    lspac = k
+                    lsstrver = objt[k]
                     lsinstalledver = lsstrver.replace(".", "")
                     res = [str(i)
                            for i in lsinstalledver.split() if i.isdigit()]
