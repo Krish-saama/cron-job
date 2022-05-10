@@ -13,12 +13,14 @@ class dbaccessdetails:
             print(result)
             return jsonify({'result': [dict(row) for row in result]})
         except Exception as e:
-            print("Exception Error: {e}")
-            return "Exception Error:{e}"
+            print("FRAMEWORKDETAILS FUN EXCEPTION : ", e)
 
     def updateframwork(pspackagename, psversion):
-        sql = text("update packagesdetails set version = '" +
-                   psversion + "' where packagename = '" + pspackagename + "'")
-        result = tables.db.engine.execute(sql)
-        print(result)
-        return jsonify({'result': [dict(row) for row in result]})
+        try:
+            sql = text("update packagesdetails set version = '" +
+                       psversion + "' where packagename = '" + pspackagename + "'")
+            result = tables.db.engine.execute(sql)
+            print(result)
+            return jsonify({'result': [dict(row) for row in result]})
+        except Exception as e:
+            print("UPDATEFRAMWORK FUN EXCEPTION : ", e)
