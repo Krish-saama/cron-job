@@ -42,6 +42,6 @@ def versions(pkg_name):
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=do_something, trigger="interval", minute=2)
+scheduler.add_job(func=do_something, trigger="interval", seconds=120)
 scheduler.start()
 atexit.register(lambda: scheduler.shutdown())
